@@ -30,17 +30,7 @@ namespace MJU23v_DTP_T1
 
     public class Program
     {
-        // Plan:
-        // 1. Lägg till planeringskommentarer. (KLAR)
-        // 2. Skapa en kommandoloop med stöd för 'help' och 'quit'. (KLAR)
-        // 3. Implementera kommandot 'list group <groupname>'. (KLAR)
-        // 4. Implementera kommandot 'list country <countryname>'. (KLAR)
-        // 5. Implementera kommandot 'show language <languagename>'. (KLAR)
-        // 6. Lägg till kommentarer för NYI-kommandon. (KLAR)
-        // 7. Lägg till felhanteringskommentarer (FIXME). (KLAR)
-        // 8. Testa och säkerställ att de fyra grundläggande kommandona fungerar. (KLAR)
-        // 9. Refaktorera om det behövs. (KLAR)
-        // 10. Gör slutlig testning och dokumentation. (PÅGÅR)
+
 
         static string dir = @"..\..\..";
         static List<Language> eulangs = new List<Language>();
