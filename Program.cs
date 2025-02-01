@@ -31,8 +31,8 @@ namespace MJU23v_DTP_T1
     public class Program
     {
         // Plan:
-        // 1. Lägg till planeringskommentarer.
-        // 2. Skapa en kommandoloop med stöd för 'help' och 'quit'.
+        // 1. Lägg till planeringskommentarer. (KLAR)
+        // 2. Skapa en kommandoloop med stöd för 'help' och 'quit'. (PÅGÅR)
         // 3. Implementera kommandot 'list group <groupname>'.
         // 4. Implementera kommandot 'list country <countryname>'.
         // 5. Implementera kommandot 'show language <languagename>'.
@@ -44,7 +44,7 @@ namespace MJU23v_DTP_T1
 
         static string dir = @"..\..\..";
         static List<Language> eulangs = new List<Language>();
-        
+
         static void Main(string[] arg)
         {
             using (StreamReader sr = new StreamReader($"{dir}\\lang.txt"))
@@ -59,51 +59,48 @@ namespace MJU23v_DTP_T1
                 }
             }
 
-            Console.WriteLine("==== Languages in Spain ====");
-            foreach (Language L in eulangs)
-            {
-                int index = L.area.IndexOf("Spain");
-                if (index != -1)
-                    L.Print();
-            }
-            
-            Console.WriteLine("==== Baltic Languages ====");
-            foreach (Language L in eulangs)
-            {
-                int index = L.group.IndexOf("Baltic");
-                if (index != -1)
-                    L.Print();
-            }
+            CommandLoop();
+        }
 
-            Console.WriteLine("==== Population larger than 50 millions ====");
-            foreach (Language L in eulangs)
+        static void CommandLoop()
+        {
+            Console.WriteLine("Welcome to the European Languages Program!");
+            Console.WriteLine("Type 'help' for a list of commands or 'quit' to exit.");
+
+            string command;
+            do
             {
-                if (L.pop >= 50_000_000)
-                    L.Print();
-            }
-            
-            Console.WriteLine("==== Number of Germanics ====");
-            int sumgerm = 0;
-            foreach (Language L in eulangs)
+                Console.Write("> ");
+                command = Console.ReadLine()?.Trim();
+                if (string.IsNullOrEmpty(command)) continue;
+
+                ProcessCommand(command);
+            } while (!command.Equals("quit", StringComparison.OrdinalIgnoreCase));
+
+            Console.WriteLine("Goodbye!");
+        }
+
+        static void ProcessCommand(string command)
+        {
+            switch (command.ToLower())
             {
-                int index = L.group.IndexOf("Germanic");
-                if (index != -1)
-                    sumgerm += L.pop;
+                case "help":
+                    PrintHelp();
+                    break;
+                case "quit":
+                    // Do nothing; loop will exit.
+                    break;
+                default:
+                    Console.WriteLine($"Unknown command: {command}");
+                    break;
             }
-            
-            Console.WriteLine($"Germanic speaking population: {sumgerm}");
-            
-            Console.WriteLine("==== Number of Romance ====");
-            int sumromance = 0;
-            
-            foreach (Language L in eulangs)
-            {
-                int index = L.group.IndexOf("Romance");
-                if (index != -1)
-                    sumromance += L.pop;
-            }
-            
-            Console.WriteLine($"Romance speaking population: {sumromance}");
+        }
+
+        static void PrintHelp()
+        {
+            Console.WriteLine("Available commands:");
+            Console.WriteLine("  help - Show this help text");
+            Console.WriteLine("  quit - Exit the program");
         }
     }
 }
