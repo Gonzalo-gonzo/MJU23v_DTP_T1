@@ -35,8 +35,8 @@ namespace MJU23v_DTP_T1
         // 2. Skapa en kommandoloop med stöd för 'help' och 'quit'. (KLAR)
         // 3. Implementera kommandot 'list group <groupname>'. (KLAR)
         // 4. Implementera kommandot 'list country <countryname>'. (KLAR)
-        // 5. Implementera kommandot 'show language <languagename>'. (PÅGÅR)
-        // 6. Lägg till kommentarer för NYI-kommandon.
+        // 5. Implementera kommandot 'show language <languagename>'. (KLAR)
+        // 6. Lägg till kommentarer för NYI-kommandon. (PÅGÅR)
         // 7. Lägg till felhanteringskommentarer (FIXME).
         // 8. Testa och säkerställ att de fyra grundläggande kommandona fungerar.
         // 9. Refaktorera om det behövs (TBD).
@@ -107,6 +107,13 @@ namespace MJU23v_DTP_T1
                     else
                         Console.WriteLine("Invalid 'show' command.");
                     break;
+
+                // NYI: Implement 'list between <lownum> and <hinum>'
+                // NYI: Implement 'show group <groupname>'
+                // NYI: Implement 'show country <countryname>'
+                // NYI: Implement 'show between <lownum> and <hinum>'
+                // NYI: Implement 'population group <groupname>'
+
                 default:
                     Console.WriteLine($"Unknown command: {parts[0]}");
                     break;
@@ -121,6 +128,13 @@ namespace MJU23v_DTP_T1
             Console.WriteLine("  list group <groupname> - List all languages in a specific group");
             Console.WriteLine("  list country <countryname> - List all languages spoken in a specific country");
             Console.WriteLine("  show language <languagename> - Show details about a specific language");
+
+            // NYI: Add descriptions for the following commands when implemented:
+            //      list between <lownum> and <hinum>
+            //      show group <groupname>
+            //      show country <countryname>
+            //      show between <lownum> and <hinum>
+            //      population group <groupname>
         }
 
         static void ListGroup(string groupName)
