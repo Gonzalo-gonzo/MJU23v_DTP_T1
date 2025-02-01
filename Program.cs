@@ -34,8 +34,8 @@ namespace MJU23v_DTP_T1
         // 1. Lägg till planeringskommentarer. (KLAR)
         // 2. Skapa en kommandoloop med stöd för 'help' och 'quit'. (KLAR)
         // 3. Implementera kommandot 'list group <groupname>'. (KLAR)
-        // 4. Implementera kommandot 'list country <countryname>'. (PÅGÅR)
-        // 5. Implementera kommandot 'show language <languagename>'.
+        // 4. Implementera kommandot 'list country <countryname>'. (KLAR)
+        // 5. Implementera kommandot 'show language <languagename>'. (PÅGÅR)
         // 6. Lägg till kommentarer för NYI-kommandon.
         // 7. Lägg till felhanteringskommentarer (FIXME).
         // 8. Testa och säkerställ att de fyra grundläggande kommandona fungerar.
@@ -101,6 +101,12 @@ namespace MJU23v_DTP_T1
                     else
                         Console.WriteLine("Invalid 'list' command.");
                     break;
+                case "show":
+                    if (parts.Length > 1 && parts[1].ToLower() == "language")
+                        ShowLanguage(parts.Skip(2).FirstOrDefault());
+                    else
+                        Console.WriteLine("Invalid 'show' command.");
+                    break;
                 default:
                     Console.WriteLine($"Unknown command: {parts[0]}");
                     break;
@@ -114,6 +120,7 @@ namespace MJU23v_DTP_T1
             Console.WriteLine("  quit - Exit the program");
             Console.WriteLine("  list group <groupname> - List all languages in a specific group");
             Console.WriteLine("  list country <countryname> - List all languages spoken in a specific country");
+            Console.WriteLine("  show language <languagename> - Show details about a specific language");
         }
 
         static void ListGroup(string groupName)
@@ -146,6 +153,22 @@ namespace MJU23v_DTP_T1
 
             foreach (var lang in languages)
                 Console.WriteLine($"- {lang.language}");
+        }
+
+        static void ShowLanguage(string languageName)
+        {
+            if (string.IsNullOrEmpty(languageName))
+            {
+                Console.WriteLine("Please specify a language name.");
+                return;
+            }
+
+            var language = eulangs.FirstOrDefault(l => l.language.Equals(languageName, StringComparison.OrdinalIgnoreCase));
+
+            if (language != null)
+                language.Print();
+            else
+                Console.WriteLine($"Language '{languageName}' not found.");
         }
     }
 }
