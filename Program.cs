@@ -39,8 +39,8 @@ namespace MJU23v_DTP_T1
         // 6. Lägg till kommentarer för NYI-kommandon. (KLAR)
         // 7. Lägg till felhanteringskommentarer (FIXME). (KLAR)
         // 8. Testa och säkerställ att de fyra grundläggande kommandona fungerar. (KLAR)
-        // 9. Refaktorera om det behövs (PÅGÅR).
-        // 10. Gör slutlig testning och dokumentation.
+        // 9. Refaktorera om det behövs. (KLAR)
+        // 10. Gör slutlig testning och dokumentation. (PÅGÅR)
 
         static string dir = @"..\..\..";
         static List<Language> eulangs = new List<Language>();
@@ -62,6 +62,10 @@ namespace MJU23v_DTP_T1
             CommandLoop();
         }
 
+        /// <summary>
+        /// Starts the interactive command loop for the program.
+        /// Users can type commands to query information about European languages.
+        /// </summary>
         static void CommandLoop()
         {
             Console.WriteLine("Welcome to the European Languages Program!");
@@ -85,6 +89,10 @@ namespace MJU23v_DTP_T1
             Console.WriteLine("Goodbye!");
         }
 
+        /// <summary>
+        /// Processes a user command and executes the corresponding functionality.
+        /// </summary>
+        /// <param name="command">The user's input command.</param>
         static void ProcessCommand(string command)
         {
             string[] parts = command.Split(' ', StringSplitOptions.RemoveEmptyEntries);
@@ -114,6 +122,9 @@ namespace MJU23v_DTP_T1
             }
         }
 
+        /// <summary>
+        /// Handles commands starting with "list".
+        /// </summary>
         static void HandleListCommand(string[] parts)
         {
             if (parts.Length > 2 && parts[1].ToLower() == "group")
@@ -124,6 +135,9 @@ namespace MJU23v_DTP_T1
                 Console.WriteLine("Invalid 'list' command.");
         }
 
+        /// <summary>
+        /// Handles commands starting with "show".
+        /// </summary>
         static void HandleShowCommand(string[] parts)
         {
             if (parts.Length > 1 && parts[1].ToLower() == "language")
@@ -132,6 +146,9 @@ namespace MJU23v_DTP_T1
                 Console.WriteLine("Invalid 'show' command.");
         }
 
+        /// <summary>
+        /// Prints a list of available commands.
+        /// </summary>
         static void PrintHelp()
         {
             Console.WriteLine("Available commands:");
@@ -140,6 +157,8 @@ namespace MJU23v_DTP_T1
             Console.WriteLine("  list group <groupname> - List all languages in a specific group");
             Console.WriteLine("  list country <countryname> - List all languages spoken in a specific country");
             Console.WriteLine("  show language <languagename> - Show details about a specific language");
+
+            // NYI: Add descriptions for future commands when implemented.
         }
 
         static void ListGroup(string groupName)
