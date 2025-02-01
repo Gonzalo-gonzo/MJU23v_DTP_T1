@@ -36,8 +36,8 @@ namespace MJU23v_DTP_T1
         // 3. Implementera kommandot 'list group <groupname>'. (KLAR)
         // 4. Implementera kommandot 'list country <countryname>'. (KLAR)
         // 5. Implementera kommandot 'show language <languagename>'. (KLAR)
-        // 6. Lägg till kommentarer för NYI-kommandon. (PÅGÅR)
-        // 7. Lägg till felhanteringskommentarer (FIXME).
+        // 6. Lägg till kommentarer för NYI-kommandon. (KLAR)
+        // 7. Lägg till felhanteringskommentarer (FIXME). (PÅGÅR)
         // 8. Testa och säkerställ att de fyra grundläggande kommandona fungerar.
         // 9. Refaktorera om det behövs (TBD).
         // 10. Gör slutlig testning och dokumentation.
@@ -72,7 +72,12 @@ namespace MJU23v_DTP_T1
             {
                 Console.Write("> ");
                 command = Console.ReadLine()?.Trim();
-                if (string.IsNullOrEmpty(command)) continue;
+
+                if (string.IsNullOrEmpty(command))
+                {
+                    // FIXME: Handle empty input gracefully.
+                    continue;
+                }
 
                 ProcessCommand(command);
             } while (!command.Equals("quit", StringComparison.OrdinalIgnoreCase));
@@ -83,7 +88,12 @@ namespace MJU23v_DTP_T1
         static void ProcessCommand(string command)
         {
             string[] parts = command.Split(' ', StringSplitOptions.RemoveEmptyEntries);
-            if (parts.Length == 0) return;
+
+            if (parts.Length == 0)
+            {
+                // FIXME: Handle case where command is empty or invalid.
+                return;
+            }
 
             switch (parts[0].ToLower())
             {
@@ -99,23 +109,17 @@ namespace MJU23v_DTP_T1
                     else if (parts.Length > 2 && parts[1].ToLower() == "country")
                         ListCountry(parts[2]);
                     else
-                        Console.WriteLine("Invalid 'list' command.");
+                        Console.WriteLine("Invalid 'list' command."); // FIXME: Provide more specific error messages.
                     break;
                 case "show":
                     if (parts.Length > 1 && parts[1].ToLower() == "language")
                         ShowLanguage(parts.Skip(2).FirstOrDefault());
                     else
-                        Console.WriteLine("Invalid 'show' command.");
+                        Console.WriteLine("Invalid 'show' command."); // FIXME: Provide more specific error messages.
                     break;
 
-                // NYI: Implement 'list between <lownum> and <hinum>'
-                // NYI: Implement 'show group <groupname>'
-                // NYI: Implement 'show country <countryname>'
-                // NYI: Implement 'show between <lownum> and <hinum>'
-                // NYI: Implement 'population group <groupname>'
-
                 default:
-                    Console.WriteLine($"Unknown command: {parts[0]}");
+                    Console.WriteLine($"Unknown command: {parts[0]}"); // FIXME: Suggest valid commands to the user.
                     break;
             }
         }
@@ -139,6 +143,13 @@ namespace MJU23v_DTP_T1
 
         static void ListGroup(string groupName)
         {
+            if (string.IsNullOrEmpty(groupName))
+            {
+                Console.WriteLine("Please specify a group name.");
+                // FIXME: Handle missing or invalid group names.
+                return;
+            }
+
             var languages = eulangs.Where(l => l.group.Contains(groupName, StringComparison.OrdinalIgnoreCase));
 
             if (!languages.Any())
@@ -155,6 +166,13 @@ namespace MJU23v_DTP_T1
 
         static void ListCountry(string countryName)
         {
+            if (string.IsNullOrEmpty(countryName))
+            {
+                Console.WriteLine("Please specify a country name.");
+                // FIXME: Handle missing or invalid country names.
+                return;
+            }
+
             var languages = eulangs.Where(l => l.area.Contains(countryName, StringComparison.OrdinalIgnoreCase));
 
             if (!languages.Any())
@@ -174,6 +192,7 @@ namespace MJU23v_DTP_T1
             if (string.IsNullOrEmpty(languageName))
             {
                 Console.WriteLine("Please specify a language name.");
+                // FIXME: Handle missing or invalid language names.
                 return;
             }
 
@@ -183,6 +202,7 @@ namespace MJU23v_DTP_T1
                 language.Print();
             else
                 Console.WriteLine($"Language '{languageName}' not found.");
+            // FIXME: Suggest similar language names if not found.
         }
     }
 }
