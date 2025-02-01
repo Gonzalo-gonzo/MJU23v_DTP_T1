@@ -37,8 +37,8 @@ namespace MJU23v_DTP_T1
         // 4. Implementera kommandot 'list country <countryname>'. (KLAR)
         // 5. Implementera kommandot 'show language <languagename>'. (KLAR)
         // 6. Lägg till kommentarer för NYI-kommandon. (KLAR)
-        // 7. Lägg till felhanteringskommentarer (FIXME). (PÅGÅR)
-        // 8. Testa och säkerställ att de fyra grundläggande kommandona fungerar.
+        // 7. Lägg till felhanteringskommentarer (FIXME). (KLAR)
+        // 8. Testa och säkerställ att de fyra grundläggande kommandona fungerar. (PÅGÅR)
         // 9. Refaktorera om det behövs (TBD).
         // 10. Gör slutlig testning och dokumentation.
 
@@ -75,7 +75,7 @@ namespace MJU23v_DTP_T1
 
                 if (string.IsNullOrEmpty(command))
                 {
-                    // FIXME: Handle empty input gracefully.
+                    Console.WriteLine("No command entered. Please try again."); // Förbättrad feedback
                     continue;
                 }
 
@@ -91,7 +91,7 @@ namespace MJU23v_DTP_T1
 
             if (parts.Length == 0)
             {
-                // FIXME: Handle case where command is empty or invalid.
+                Console.WriteLine("Invalid command format."); // Förbättrad feedback
                 return;
             }
 
@@ -109,17 +109,17 @@ namespace MJU23v_DTP_T1
                     else if (parts.Length > 2 && parts[1].ToLower() == "country")
                         ListCountry(parts[2]);
                     else
-                        Console.WriteLine("Invalid 'list' command."); // FIXME: Provide more specific error messages.
+                        Console.WriteLine("Invalid 'list' command.");
                     break;
                 case "show":
                     if (parts.Length > 1 && parts[1].ToLower() == "language")
                         ShowLanguage(parts.Skip(2).FirstOrDefault());
                     else
-                        Console.WriteLine("Invalid 'show' command."); // FIXME: Provide more specific error messages.
+                        Console.WriteLine("Invalid 'show' command.");
                     break;
 
                 default:
-                    Console.WriteLine($"Unknown command: {parts[0]}"); // FIXME: Suggest valid commands to the user.
+                    Console.WriteLine($"Unknown command: {parts[0]}");
                     break;
             }
         }
@@ -132,13 +132,6 @@ namespace MJU23v_DTP_T1
             Console.WriteLine("  list group <groupname> - List all languages in a specific group");
             Console.WriteLine("  list country <countryname> - List all languages spoken in a specific country");
             Console.WriteLine("  show language <languagename> - Show details about a specific language");
-
-            // NYI: Add descriptions for the following commands when implemented:
-            //      list between <lownum> and <hinum>
-            //      show group <groupname>
-            //      show country <countryname>
-            //      show between <lownum> and <hinum>
-            //      population group <groupname>
         }
 
         static void ListGroup(string groupName)
@@ -146,7 +139,6 @@ namespace MJU23v_DTP_T1
             if (string.IsNullOrEmpty(groupName))
             {
                 Console.WriteLine("Please specify a group name.");
-                // FIXME: Handle missing or invalid group names.
                 return;
             }
 
@@ -169,7 +161,6 @@ namespace MJU23v_DTP_T1
             if (string.IsNullOrEmpty(countryName))
             {
                 Console.WriteLine("Please specify a country name.");
-                // FIXME: Handle missing or invalid country names.
                 return;
             }
 
@@ -192,7 +183,6 @@ namespace MJU23v_DTP_T1
             if (string.IsNullOrEmpty(languageName))
             {
                 Console.WriteLine("Please specify a language name.");
-                // FIXME: Handle missing or invalid language names.
                 return;
             }
 
@@ -202,7 +192,6 @@ namespace MJU23v_DTP_T1
                 language.Print();
             else
                 Console.WriteLine($"Language '{languageName}' not found.");
-            // FIXME: Suggest similar language names if not found.
         }
     }
 }
